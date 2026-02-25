@@ -6,11 +6,12 @@
 #' @param lwdp numeric: line width
 #' @param sounds logical: if FALSE sounds are silences
 #' @param delay numeric: specify seconds after that all devices will be closed
+#' @param old.traces matrix: If null, nothing happens. If you want to see where you traced last time without doing it all over again, add in your matrix from before and they will show as yellow ticks.
 #' @return matrix: a matrix with stored coordinates (4) of the sampled marks (coordinates 1 and 2 for the lenght; coordinates 3 and 4 for the width)
 #' @author Antonio Profico, Flavia Strani, Pasquale Raia, Daniel DeMiguel
 #' @export
 
-samp.traces<-function (image.ico, cexp = 0.5, lwdp = NULL, sounds = FALSE, delay=3) 
+samp.traces<-function (image.ico, cexp = 0.5, lwdp = NULL, sounds = FALSE, delay=3, old.traces=NULL) 
 {
   if(sounds == FALSE){
   options(locatorBell = FALSE)
@@ -27,6 +28,31 @@ samp.traces<-function (image.ico, cexp = 0.5, lwdp = NULL, sounds = FALSE, delay
   rect(image.ico$work_area[[1]], image.ico$work_area[[2]], 
        image.ico$work_area[[3]], image.ico$work_area[[4]], border = "red", 
        lwd = 2)
+  
+  #if you include an old traces file
+  if(is.null(old.traces)==FALSE){
+    fs = NULL
+    
+    for(i in 1:length(old.traces)){ 
+      fs1 <- data.frame(old.traces[i]) %>% 
+        mutate(S = as.character(i))
+      fs1$pt <- row.names(fs1)
+      fs <- rbind(fs, fs1)
+    }
+    
+    fs2 <- fs %>%
+      filter(pt %in% c(1,2))
+    
+    #find total length of entries
+    fs.cat <- unique(fs2$S)
+    
+    for(i in 1:length(fs.cat)){
+      fs3 <- fs2 %>% filter(S == fs.cat[i])
+      points(fs3$fix_n_x[c(1,2)], fs3$fix_n_y[c(1,2)], col = "yellow", type = "l", lwd=1)    
+    }
+  }
+  
+  
   x11(xpos = -1, ypos = 0, width = 3.5, height = 5)
   plot(NA, xlim = c(0, 20), ylim = c(0, 10), axes = F, xlab = "", 
        ylab = "")
@@ -194,7 +220,8 @@ replicate(length(dev.list()), dev.off())
   if(sounds == FALSE){
   options(locatorBell = TRUE)
   }
-  return(big_matrix)
+  
+   return(big_matrix)
 }
 
 
