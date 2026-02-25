@@ -16,7 +16,7 @@
 
 
 scale_Ico<-function (image.ico, xpos = 0, ypos = 0, types = "n", cols = "red", 
-          cexs = NULL, pchs = 3, sounds = FALSE,delay=3) 
+          cexs = NULL, pchs = 3, sounds = FALSE,delay=3, size.var) 
 {
 
   if(sounds == FALSE){
@@ -42,14 +42,14 @@ scale_Ico<-function (image.ico, xpos = 0, ypos = 0, types = "n", cols = "red",
          col = "red")
   scale_p <- list(x = c(scale_p_t[[1]], scale_p_t2[[1]]), y = c(scale_p_t[[2]], 
                                                                 scale_p_t2[[2]]))
-  length_scale = NULL
-  print("Insert length scale in micron")
-  length_scale <- as.numeric(readLines(n = 1))
+  #length_scale = NULL
+  #print("Insert length scale in micron")
+  length_scale <- size.var#as.numeric(readLines(n = 1)) 
   dist_scale_p <- abs(scale_p$x[2] - scale_p$x[1])
   dist_scale_p <- length_scale/dist_scale_p
   image.ico$res <- image.ico$res * dist_scale_p
   image.ico$unit <- "micron"
-  image.ico$area <- image.ico$area * dist_scale_p
+  image.ico$area <- image.ico$area * dist_scale_p #fix from Ondrej-klima
   image.ico$zoom <- max(image.ico$res) * dist_scale_p
   image.ico$xlim <- image.ico$xlim * dist_scale_p
   image.ico$ylim <- image.ico$ylim * dist_scale_p
