@@ -1,18 +1,33 @@
 
 #' parr_plot
 #'
-#' visualize pairs of scratches which are parallel and/or that cross each other.
+#' visualize pairs of scratches which are parallel and/or that cross each other. Mostly to make certain cross-Parallel is working as expected.
 #' @param scr matrix: list of scratches returned from cross-parallel
-#' @param image.ico Ico.object: Ico class
+#' @param working.area.ico Ico.object: Ico class object output from Warea.Ico()
 #' @param big_matrix matrix: a matrix with stored coordinates (4) of the sampled marks (coordinates 1 and 2 for the length; coordinates 3 and 4 for the width)
 #' @author Meaghan Wetherell
 #' @examples
-#' \dontrun{
+#' \donttest{
 #'
+#'data("C_el_war") #working area
+#'data("C_el_sam") #sampled traces
+#'data("C_el_cla") #classification
+#'
+#'#make the cross-parallel dataset
+#'C_scr <- cross.parallel(big_matrix = C_el_sam,
+#'    image.ico = C_el_war$image,
+#'    Type = C_el_cla$Type)
+#'
+#'#visualize cross-parallel scratches
+#'parr_plot(image.ico = C_el_war,
+#'            big_matrix = C_el_sam,
+#'            scr = C_scr)
 #' }
 #' @export
 #a plot to see if something is parallel or not according to output
-parr_plot<-function (image.ico, big_matrix, scr) {
+
+
+parr_plot<-function (working.area.ico, big_matrix, scr) {
   scr2 <-data.frame(scr)
   cross.t <- scr2 %>% filter(cross == "YES")
   cross.t2 <- unique(c(cross.t$scratch_1, cross.t$scratch_2))
@@ -42,11 +57,11 @@ parr_plot<-function (image.ico, big_matrix, scr) {
                                 ifelse( fs.cat[i] %in% paral.t2, "blue", "red"))}
   paralshp <- function(){ifelse( fs.cat[i] %in% paral.t2, 2, 1)}
 
-  plot_Ico(image.ico$image, xpos = 0, ypos = 0) #plots the SEM image
+  plot_Ico(working.area.ico$image, xpos = 0, ypos = 0) #plots the SEM image
 
   #plots the working area
-  rect(image.ico$work_area[[1]], image.ico$work_area[[2]],
-       image.ico$work_area[[3]], image.ico$work_area[[4]], border = "red",
+  rect(working.area.ico$work_area[[1]], working.area.ico$work_area[[2]],
+       working.area.ico$work_area[[3]], working.area.ico$work_area[[4]], border = "red",
        lwd = 2)
 
 
