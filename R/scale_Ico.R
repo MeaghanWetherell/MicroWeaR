@@ -17,7 +17,7 @@
 
 
 scale_Ico<-function (image.ico, xpos = 0, ypos = 0, types = "n", cols = "red",
-          cexs = NULL, pchs = 3, sounds = FALSE,delay=3, size.var)
+          cexs = NULL, pchs = 3, sounds = FALSE,delay=3, size.var=9999)
 {
 
   if(sounds == FALSE){
@@ -43,9 +43,8 @@ scale_Ico<-function (image.ico, xpos = 0, ypos = 0, types = "n", cols = "red",
          col = "red")
   scale_p <- list(x = c(scale_p_t[[1]], scale_p_t2[[1]]), y = c(scale_p_t[[2]],
                                                                 scale_p_t2[[2]]))
-  if(is.null(size.var)){
-
-    print("Insert length scale in micron")
+  if(size.var==9999){
+    print("In console, type the length of the scale in microns")
     length_scale <- as.numeric(readLines(n = 1))
   } else {
     length_scale <- size.var

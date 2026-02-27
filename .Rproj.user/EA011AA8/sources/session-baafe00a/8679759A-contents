@@ -1,0 +1,185 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-12-04"
+---
+
+https://pmc.ncbi.nlm.nih.gov/articles/PMC6065344/
+https://github.com/MicroWeaR/MicroWeaR
+https://rdrr.io/github/MicroWeaR/MicroWeaR/man/MicroWeaR-package.html
+devtools::install_github("MicroWeaR/MicroWeaR",local=FALSE)
+
+```{r eval=FALSE}
+# to install MMW's updated version of MicroWeaR
+devtools::install_github("MeaghanWetherell/MicroWeaR", local=FALSE)
+```
+
+```{r}
+library(MicroWeaR)
+library(dplyr)
+'%!in%' <- function(x,y)!('%in%'(x,y))
+
+rm(tracix, wa, img, cls, scr, results)
+```
+
+
+```{r eval=FALSE}
+path <- "4 - JODA Ekg Bone/Wetherell_010626_4_SE_6.tif"
+shortpath <- "JEkg.bone.6"
+size.var <- 10
+
+
+img <- scale_Ico( class.Ico(path),  delay = 3) #opens a window, asks to scale
+wa <- Warea.Ico(img) #in that window, we now have to select our working area. then select the ticky box for whichever centroid size box you want.
+tracix <- samp.traces(wa, sounds = TRUE, delay = 2) #when you want to be done, don't go next. go stop. Double click it if you have to. This is the same thing as "big matrix"
+cls <- autom_class(tracix, img) #classifies traces
+scr <- cross.parallel(big_matrix = tracix,
+                      working.area.ico = wa$image,
+                      Type = cls$Type)
+
+results <- output.Ico(big_matrix = tracix, cls$Type, scr, wa)
+save(img, wa,tracix, cls,  scr, results, file = paste0("RData/", shortpath, ".RData"))
+
+canc_plot(wa, big_matrix = tracix, Type = cls$Type)
+```
+
+
+```{r}
+training <- rbind(
+    c("Strait1993A", "SA", "Eumops underwoodz"),
+    c("Strait1993C", "SC", "Hipposideros commersoni"),
+    c("Strait1993F", "SF", "Vampyrum spectrum"),
+    c("Mihlbacher2012A", "MA", "Mihlbacher2012A"),
+    c("Mihlbacher2012B", "MB", "Mihlbacher2012B")
+) %>%
+  as.data.frame()
+colnames(training) <- c("Rdata", "acronym", "Species")
+write.csv(training, "Microwear Training Data Files.csv", row.names = FALSE)
+```
+
+Add some traces on, looking at your pre-existing ones
+```{r eval=FALSE}
+OK = shortpath #which one? you've been overwriting your shit.
+OK = df$Rdata[i]
+
+tracix2 <- samp.traces(wa, sounds = TRUE, delay = 2, old.traces = tracix)
+tracix3 <- c(tracix, tracix2)
+cls2 <- autom_class(tracix3, img) #classifies traces
+scr2 <- cross.parallel(big_matrix = tracix3,
+                      image.ico = wa$image,
+                      Type = cls2$Type)
+results2 <- output.Ico(big_matrix = tracix3, cls2$Type, scr2, wa)
+save(img, wa,tracix3, cls=cls2,  scr2, results2, file = paste0("RData/", OK, ".RData"))
+```
+
+to reload the things you've done before
+```{r}
+load_and_rename <- function(file, suffix, envir = .GlobalEnv) {
+  tmp <- new.env(parent = emptyenv()) #load into a new environment, not global
+  obj_names <- load(paste0("RData/",file, ".RData"), envir = tmp) 
+  
+  #rename each of these objects and load them into the global environment
+  for (nm in obj_names) {
+    new_name <- paste0(nm, ".", suffix)
+    assign(new_name, tmp[[nm]], envir = envir)
+  }
+  
+  #hide the original object names
+  #invisible(obj_names)
+  
+}
+
+df <- rbind(
+    c("JODAEkg.17", "jd1", "JODA Ekgmowechashala"),
+    c("JODAEkg.52", "jd2", "JODA Ekgmowechashala"),
+    c("JODAEkg.48", "jd3", "JODA Ekgmowechashala"),
+    c("WildcatEkg.13", "e1", "Ekgmowechashala"),
+    c("WildcatEkg.34", "e2", "Ekgmowechashala"),
+    c("WildcatEkg.37", "e3", "Ekgmowechashala"),
+    c("WildcatEkg.44", "e4", "Ekgmowechashala"),
+    c("WildcatEkg.57", "e5", "Ekgmowechashala"),
+    c("Horse.154", "h1", "Miohippus"),
+    c("Horse.157", "h2", "Miohippus"),
+    c("Archaetherium.125", "a1", "Archaetherium"),
+    c("Archaetherium.125.2", "a2", "Archaetherium"),
+    c("Archaetherium.131", "a3", "Archaetherium"),
+    c("Agriochoerus.76", "ag1", "Agriochoerus"),
+    c("Agriochoerus.62", "ag2", "Agriochoerus"),
+    c("Agriochoerus.62.2", "ag3", "Agriochoerus")
+) %>%
+  as.data.frame()
+colnames(df) <- c("Rdata", "acronym", "Species")
+
+
+
+
+df2 <- rbind(
+    c("JEkg.bone.5", "jd.b1", "JODA Ekgmowechashala", "995x"),
+    c("Ekg.bone.13", "e.b1", "Ekgmowechashala", "2984x"),
+    c("Hedge.bone.78", "p.1", "Paeninsuladenerix", "995x"),
+    c("JEkg.bone.6", "jd.b2", "JODA Ekgmowechashala", "2984x"),
+    c("Ekg.bone.11", "e.b2", "Ekgmowechashala", "995x")
+) %>%
+  as.data.frame()
+colnames(df2) <- c("Rdata", "acronym", "Species", "Magnification")
+write.csv(df2, "Microwear Bone Data Files.csv", row.names = FALSE)
+
+for(i in 1:length(df$Rdata)){
+  load_and_rename(df$Rdata[i], df$acronym[i])
+  
+}
+
+
+write.csv(df, "Microwear Data Files.csv", row.names = FALSE)
+
+
+canc_plot(wa.e1, tracix.e1, cls.e1$Type)
+canc_plot(wa.a2, tracix.a2, cls.a2$Type)
+canc_plot(wa.a3, tracix.a3, cls.a3$Type)
+```
+
+Load in all results to cross compare
+```{r}
+all.results <- NULL
+all.class <- NULL
+for(i in 1:length(df$Rdata)){
+  load(paste0("RData/",df$Rdata[i], ".Rdata"))
+  all.results <- rbind(all.results, 
+                       data.frame(results) %>% 
+                         mutate(Sample = df$Rdata[i],
+                                Species = df$Species[i]))
+  all.class <- rbind(all.class, 
+                       data.frame(cls$Matrix, Type = cls$Type) %>% 
+                         mutate(Sample = df$Rdata[i],
+                                Species = df$Species[i]))
+}
+
+
+```
+
+
+Need to reload them to check them and don't want to change the names?
+```{r}
+i = 2
+
+
+for(i in 1: length(df$Rdata)){
+  load(paste0("RData/",df$Rdata[i], ".RData"))
+  if(is.null(img$name)){img$name <- df$Rdata[i]}
+  cls <- autom_class(tracix, img) #classifies traces
+  scr <- cross.parallel(big_matrix = tracix,
+                        image.ico = wa$image,
+                        Type = cls$Type)
+  results <- output.Ico(big_matrix = tracix, cls$Type, scr, wa)
+  save(img, wa,tracix, cls,  scr, results, file = paste0("RData/", shortpath, ".RData"))
+}
+
+```
+
+
+```{r}
+overall <- all.class %>%
+  group_by(Species, Type) %>%
+  summarize(Count = n(),
+            Length.mean = mean(length, na.rm=TRUE))
+```
