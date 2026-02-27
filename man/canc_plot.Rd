@@ -4,15 +4,17 @@
 \alias{canc_plot}
 \title{canc_plot}
 \usage{
-canc_plot(image.ico, big_matrix)
+canc_plot(working.area, big_matrix, Type)
 }
 \arguments{
-\item{image.ico}{Ico.object: Ico class image}
+\item{working.area}{Ico.object: Ico class image}
 
-\item{big_matrix}{matrix: a matrix with stored coordinates (4) of the sampled marks (coordinates 1 and 2 for the lenght; coordinates 3 and 4 for the width)}
+\item{big_matrix}{matrix: a matrix with stored coordinates (4) of the sampled marks (coordinates 1 and 2 for the length; coordinates 3 and 4 for the width)}
+
+\item{Type}{character: scars type}
 }
 \description{
-Plot the scars stored in the object big_matrix associated to an image of class Ico.
+Plot the scars stored in the object big_matrix associated to an image of class Ico. Now updated to use color coding to indicate classifications.
 }
 \author{
 Antonio Profico, Flavia Strani, Pasquale Raia, Daniel DeMiguel

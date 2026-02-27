@@ -1,5 +1,4 @@
 #' @name MicroWeaR-package
-#' @docType package
 #' @aliases MicroWeaR
 #' @title MicroWeaR is a Package to Examine and Score Microwear Scars
 #' @author Antonio Profico, Flavia Strani, Pasquale Raia, Daniel DeMiguel
@@ -14,4 +13,6 @@
 #' @importFrom graphics locator plot points rasterImage rect text
 #' @importFrom stats sd
 #' @importFrom utils combn
+#' @importFrom dplyr mutate filter left_join %>%
+"_PACKAGE"
 NULL

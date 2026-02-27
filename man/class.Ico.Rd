@@ -4,12 +4,10 @@
 \alias{class.Ico}
 \title{class.Ico}
 \usage{
-class.Ico(path, image.type = c("jpg", "png", "tiff"))
+class.Ico(path)
 }
 \arguments{
 \item{path}{character: path of an image file}
-
-\item{image.type}{character: image format file ("jpg", "png", "tiff")}
 }
 \value{
 image matrix: class Ico image of the loaded file

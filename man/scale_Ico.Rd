@@ -13,7 +13,8 @@ scale_Ico(
   cexs = NULL,
   pchs = 3,
   sounds = FALSE,
-  delay = 3
+  delay = 3,
+  size.var
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ scale_Ico(
 \item{sounds}{logical: if FALSE sounds are silences}
 
 \item{delay}{numeric: specify seconds after that all devices will be closed}
+
+\item{size.var}{numeric: If you already know the scale bar size you can enter it here instead of typing it in afterwards.}
 }
 \value{
 Ico.object: class Ico scaled image (based on the provided metric reference)

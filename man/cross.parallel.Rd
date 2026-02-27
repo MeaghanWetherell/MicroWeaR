@@ -7,7 +7,7 @@
 cross.parallel(big_matrix, image.ico, Type)
 }
 \arguments{
-\item{big_matrix}{matrix: a matrix with stored coordinates (4) of the sampled marks (coordinates 1 and 2 for the lenght; coordinates 3 and 4 for the width)}
+\item{big_matrix}{matrix: a matrix with stored coordinates (4) of the sampled marks (coordinates 1 and 2 for the length; coordinates 3 and 4 for the width)}
 
 \item{image.ico}{Ico.object: Ico class}
 

@@ -4,7 +4,14 @@
 \alias{samp.traces}
 \title{samp.traces}
 \usage{
-samp.traces(image.ico, cexp = 0.5, lwdp = NULL, sounds = FALSE, delay = 3)
+samp.traces(
+  image.ico,
+  cexp = 0.5,
+  lwdp = NULL,
+  sounds = FALSE,
+  delay = 3,
+  old.traces = NULL
+)
 }
 \arguments{
 \item{image.ico}{Ico.object: Ico class}
@@ -16,6 +23,8 @@ samp.traces(image.ico, cexp = 0.5, lwdp = NULL, sounds = FALSE, delay = 3)
 \item{sounds}{logical: if FALSE sounds are silences}
 
 \item{delay}{numeric: specify seconds after that all devices will be closed}
+
+\item{old.traces}{matrix: If null, nothing happens. If you want to see where you traced last time without doing it all over again, add in your matrix from before and they will show as yellow ticks.}
 }
 \value{
 matrix: a matrix with stored coordinates (4) of the sampled marks (coordinates 1 and 2 for the lenght; coordinates 3 and 4 for the width)
