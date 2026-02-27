@@ -4,21 +4,34 @@
 \alias{parr_plot}
 \title{parr_plot}
 \usage{
-parr_plot(image.ico, big_matrix, scr)
+parr_plot(working.area.ico, big_matrix, scr)
 }
 \arguments{
-\item{image.ico}{Ico.object: Ico class}
+\item{working.area.ico}{Ico.object: Ico class object output from Warea.Ico()}
 
 \item{big_matrix}{matrix: a matrix with stored coordinates (4) of the sampled marks (coordinates 1 and 2 for the length; coordinates 3 and 4 for the width)}
 
 \item{scr}{matrix: list of scratches returned from cross-parallel}
 }
 \description{
-visualize pairs of scratches which are parallel and/or that cross each other.
+visualize pairs of scratches which are parallel and/or that cross each other. Mostly to make certain cross-Parallel is working as expected.
 }
 \examples{
 \dontrun{
 
+data("C_el_war") #working area
+data("C_el_sam") #sampled traces
+data("C_el_cla") #classification
+
+#make the cross-parallel dataset
+C_scr <- cross.parallel(big_matrix = C_el_sam,
+   image.ico = C_el_war$image,
+   Type = C_el_cla$Type)
+
+#visualize cross-parallel scratches
+parr_plot(image.ico = C_el_war,
+           big_matrix = C_el_sam,
+           scr = C_scr)
 }
 }
 \author{
