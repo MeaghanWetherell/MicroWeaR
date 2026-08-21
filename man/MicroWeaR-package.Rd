@@ -3,6 +3,7 @@
 \docType{package}
 \name{MicroWeaR-package}
 \alias{MicroWeaR-package}
+\alias{_PACKAGE}
 \alias{MicroWeaR}
 \title{MicroWeaR is a Package to Examine and Score Microwear Scars}
 \description{

@@ -5,7 +5,7 @@ To install this particular development version (beta) of *MicroWeaR* R-package f
 
 ```{r} 
 install.packages("devtools")
-devtools::install_github("MeaghanWetherell/MicroWeaR/",local=FALSE)
+devtools::install_github("MeaghanWetherell/MicroWeaR/")
 ```
 
 If running the previous lines the MicroWeaR installing fails, try this code:
@@ -21,6 +21,10 @@ install_github("MeaghanWetherell/MicroWeaR/",local=FALSE)
 library(MicroWeaR)
 ```
 
+# Changelog
+
+8.21.2026 - Version 1.1.1 now includes the feature density measurements in the results from outcome.Ico().
+2.27.2026 - Created parr.plot() to include option to visualize categorization, fixed class.Ico() to accommodate different SEM image types, and other changes.
 
 
 MicroWeaR mailing list: https://groups.google.com/forum/#!forum/microwear

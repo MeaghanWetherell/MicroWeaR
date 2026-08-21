@@ -17,6 +17,22 @@ output.Ico(big_matrix, Type, cross_paral, w.area)
 }
 \value{
 output_1 numeric: matrix with sampled marks count and classification
+
+* N.pits is the total number of pits
+* N.sp is the number of small pits
+* N,lp is the number of large pits
+* N.scratches is the total number of scratches
+* N.fs is the number of fine scratches
+* N.cs is the number of coarse scratches
+* N.Ps is the parallel scratches
+* N.Xs is the number of cross-parallel scratches
+* %Ps is the percentages of scratches that are parallel
+* %Xs is the percentage of scratches that are cross-parallel
+* FeatureDensity is the total number of features per mm2
+* Pmm2 is the number of pits per mm2
+* Smm2 is the number of scratches per mm2
+* PitPercent is the percentage of pits
+* ScrachPercent is the percentage of scratches
 }
 \description{
 Print a summary statistics table reporting the number of pits and scratches (and the size of any sub-category).
@@ -42,5 +58,5 @@ output.Ico(C_el_sam,class$Type,criss_cross,C_el_war)
 }
 }
 \author{
-Antonio Profico, Flavia Strani, Pasquale Raia, Daniel DeMiguel
+Antonio Profico, Flavia Strani, Pasquale Raia, Daniel DeMiguel, Meaghan Wetherell
 }

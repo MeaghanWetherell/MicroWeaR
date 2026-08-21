@@ -14,7 +14,7 @@ scale_Ico(
   pchs = 3,
   sounds = FALSE,
   delay = 3,
-  size.var
+  size.var = 9999
 )
 }
 \arguments{
