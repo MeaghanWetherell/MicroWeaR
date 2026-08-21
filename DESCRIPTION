@@ -1,7 +1,7 @@
 Package: MicroWeaR
 Title: Tool to Examine and Score Microwear Scars in a Semi-Automatic Way
-Version: 1.1.0
-Author: Antonio Profico, Flavia Strani, Pasquale Raia, Daniel DeMiguel
+Version: 1.1.1
+Author: Antonio Profico, Flavia Strani, Pasquale Raia, Daniel DeMiguel, Meaghan Wetherell
 Maintainer: Antonio Profico <antonio.profico@uniroma1.it>
 Description: A tool that provides a summary statistic of the sampled scars for the user. The package includes functions to sample the scars, classify features as pits or scratches and then into consider also their respective subcategories, generate an output table with summary information, and obtain a visual surface-map in where scars are tracked.
 Depends: R (>= 3.4.0)
